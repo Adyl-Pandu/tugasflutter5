@@ -11,23 +11,43 @@ class ProfilePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
-            CircleAvatar(
-              radius: 50,
-              child: Icon(Icons.person, size: 50),
-            ),
-            SizedBox(height: 16),
-            Text(
-              'Adyl Pandu Setiawann',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 8),
-            Text(
-              'Engineer',
-              style: TextStyle(fontSize: 16, color: Colors.grey),
-            ),
+            ProfileAvatar(),
+            ProfileInfo()
           ],
         ),
       ),
     );
   }
 }
+
+class ProfileAvatar extends StatelessWidget {
+  const ProfileAvatar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return CircleAvatar(
+              radius: 50,
+              child: Icon(Icons.person, size: 50),
+            );
+  }
+}
+
+class ProfileInfo extends StatelessWidget {
+  const ProfileInfo({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text('Adyl Pandu Setiawan'),
+        Text('Developer')
+      ],
+    )
+    ;
+  }
+}
+
+
+// Tugas: Memecah Column dengan membuat Custom Widget ProfileAvatar dan ProfileInfo.
+// Commit: refactor: extract avatar and info into custom widgets
