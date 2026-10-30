@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Profil App',
+      title: '',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue),
       home: const ProfilePage(),

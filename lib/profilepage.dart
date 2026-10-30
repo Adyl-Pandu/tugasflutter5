@@ -12,7 +12,8 @@ class ProfilePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
             ProfileAvatar(),
-            ProfileInfo()
+            ProfileInfo(),
+            Profilestatistics()
           ],
         ),
       ),
@@ -40,14 +41,41 @@ class ProfileInfo extends StatelessWidget {
     return const Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text('Adyl Pandu Setiawan'),
-        Text('Developer')
+        Text('Adyl Pandu Setiawan', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+        Text('Developer',style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold))
       ],
     )
     ;
   }
 }
 
+class Profilestatistics extends StatelessWidget {
+  const Profilestatistics ({super.key});
 
-// Tugas: Memecah Column dengan membuat Custom Widget ProfileAvatar dan ProfileInfo.
-// Commit: refactor: extract avatar and info into custom widgets
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: const [
+        Column(
+            children: [
+              Text('12', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              Text('Proyek'),
+            ],
+          ),
+          Column(
+            children: [
+              Text('340', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              Text('Followers'),
+            ],
+          ),
+          Column(
+            children: [
+              Text('180', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              Text('Following'),
+            ],
+          ),
+      ]
+    );
+  }
+}
