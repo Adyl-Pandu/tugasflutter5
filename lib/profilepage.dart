@@ -23,14 +23,32 @@ class ProfilePage extends StatelessWidget {
             child: ListView.builder(
               itemCount: experiences.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  leading: const Icon(Icons.work),
-                  title: Text(experiences[index]),
-                );
+                return ExperienceCard(title: experiences[index]);
               },
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class ExperienceCard extends StatelessWidget {
+  final String title;
+
+  const ExperienceCard({
+    super.key,
+    required this.title,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 4,
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: ListTile(
+        leading: const Icon(Icons.work, color: Colors.blue),
+        title: Text(title),
       ),
     );
   }
