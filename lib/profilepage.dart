@@ -3,19 +3,34 @@ import 'package:flutter/material.dart';
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
+  final List<String> experiences = const [
+    'buat web pake laravel',
+    'buat web pake node',
+    'buat web pake js',
+    'buat web pake php',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Profil Saya')),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            ProfileAvatar(),
-            ProfileInfo(),
-            ProfileStats(),
-          ],
-        ),
+      body: Column(
+        children: [
+          const ProfileAvatar(),
+          const ProfileInfo(),
+          const ProfileStats(),
+          Expanded(
+            child: ListView.builder(
+              itemCount: experiences.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  leading: const Icon(Icons.work),
+                  title: Text(experiences[index]),
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
