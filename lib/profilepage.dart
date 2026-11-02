@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
-  final List<String> experiences = const [
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  // Variabel state: nilainya tidak lagi hardcode di widget anak
+  String userName = 'Adyl Pandu Setiawan';
+
+  final List<String> experiences = [
     'buat web pake laravel',
     'buat web pake node',
     'buat web pake js',
@@ -16,9 +24,13 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(title: const Text('Profil Saya')),
       body: Column(
         children: [
+          const SizedBox(height: 24),
           const ProfileAvatar(),
-          const ProfileInfo(),
+          ProfileInfo(name: userName, role: 'Developer'),
+          const SizedBox(height: 16),
           const ProfileStats(),
+          const SizedBox(height: 16),
+          const Divider(),
           Expanded(
             child: ListView.builder(
               itemCount: experiences.length,
@@ -29,6 +41,34 @@ class ProfilePage extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class ProfileInfo extends StatelessWidget {
+  final String name;
+  final String role;
+
+  const ProfileInfo({
+    super.key,
+    required this.name,
+    required this.role,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(
+          name,
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+        Text(
+          role,
+          style: const TextStyle(fontSize: 16, color: Colors.grey),
+        ),
+      ],
     );
   }
 }
@@ -62,23 +102,6 @@ class ProfileAvatar extends StatelessWidget {
     return const CircleAvatar(
       radius: 50,
       child: Icon(Icons.person, size: 50),
-    );
-  }
-}
-
-class ProfileInfo extends StatelessWidget {
-  const ProfileInfo({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text('Adyl Pandu Setiawan',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-        Text('Developer',
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-      ],
     );
   }
 }
