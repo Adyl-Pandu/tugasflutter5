@@ -8,8 +8,8 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  // Variabel state: nilainya tidak lagi hardcode di widget anak
   String userName = 'Adyl Pandu Setiawan';
+  final TextEditingController _nameController = TextEditingController();
 
   final List<String> experiences = [
     'buat web pake laravel',
@@ -17,6 +17,50 @@ class _ProfilePageState extends State<ProfilePage> {
     'buat web pake js',
     'buat web pake php',
   ];
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    super.dispose();
+  }
+
+  void _showEditDialog() {
+    _nameController.text = userName;
+
+    showDialog(
+      context: context,
+      builder: (dialogContext) {
+        return AlertDialog(
+          title: const Text('Edit Profil'),
+          content: TextFormField(
+            controller: _nameController,
+            decoration: const InputDecoration(
+              labelText: 'Nama',
+              border: OutlineInputBorder(),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(dialogContext),
+              child: const Text('Batal'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                final newName = _nameController.text.trim();
+                if (newName.isNotEmpty) {
+                  setState(() {
+                    userName = newName;
+                  });
+                }
+                Navigator.pop(dialogContext);
+              },
+              child: const Text('Simpan'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +71,11 @@ class _ProfilePageState extends State<ProfilePage> {
           const SizedBox(height: 24),
           const ProfileAvatar(),
           ProfileInfo(name: userName, role: 'Developer'),
+          const SizedBox(height: 12),
+          ElevatedButton(
+            onPressed: _showEditDialog,
+            child: const Text('Edit Profil'),
+          ),
           const SizedBox(height: 16),
           const ProfileStats(),
           const SizedBox(height: 16),
